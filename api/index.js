@@ -3,7 +3,7 @@ const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-//const models=require('./models')
+const models=require('./models')
 
 const db = require("./db"); //carpeta de configuracion de db
 //const router = require("./routes");
@@ -27,6 +27,6 @@ app.use((err, req, res, next) => {
   res.status(500).send(err.message);
 });
 
-db.sync({ force: false }).then(() => {
+db.sync({ force: true }).then(() => {
   app.listen(3001, () => console.log("server levantado en puerto 3001"));
 });

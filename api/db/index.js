@@ -5,4 +5,4 @@ const db= new Sequelize('manga', null, null,{
     logging: false
 })
 
-module.exports= db
+module.exports= db;
