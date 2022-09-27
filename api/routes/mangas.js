@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const Mangascotroller=require("../controllers/mangascontroller")
+const Mangascontroller=require("../controllers/mangascontroller")
 
 
 //rutas
 //buscar mangas por id a traves de params
-router.get('/:name', Mangascotroller.search)
+router.get('search/:name', Mangascontroller.search)
 
-
+router.get('onemanga/:id', Mangascontroller.one)
 
 
 
