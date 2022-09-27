@@ -3,7 +3,7 @@ const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const models=require('./models')
+const models = require("./models");
 
 const db = require("./db"); //carpeta de configuracion de db
 const router = require("./routes");
@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 app.use(cors());
 
-app.use('/api', router)
+app.use("/api", router);
 
 // error middleware -> https://expressjs.com/es/guide/error-handling.html
 app.use((err, req, res, next) => {
@@ -28,5 +28,7 @@ app.use((err, req, res, next) => {
 });
 
 db.sync({ force: true }).then(() => {
-  app.listen(3001, () => console.log("server levantado en puerto 3001"));
+  app.listen(process.env.PORT, () =>
+    console.log("server levantado en puerto 3001")
+  );
 });
