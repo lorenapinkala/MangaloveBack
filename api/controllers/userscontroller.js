@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const {generateToken}=require('../config/token')
 
 class Userscontroller {
   static async register(req, res) {
@@ -20,29 +21,25 @@ class Userscontroller {
 
   static async login(req, res) {
     try {
-      //req.body por formulario
       const { email, password } = req.body;
-      //busca en la base de datos al usuario con ese email
       const user = await User.findOne({
-        where: { email: email },
+        where: { email },
       });
-      //si no esta no esta autorizado
+      console.log(user)
       if (!user) return res.sendStatus(401);
-      //valida si la password es correcta
-      const isValid = await User.validatePassword(password);
+      const isValid = await user.validatePassword(password);
       if (!isValid) return res.sendStatus(401);
 
-      //informacion con la que se genera el token
-      const payload = await{
-        name: securityGuard.name,
-        email: securityGuard.email,
+      const payload = {
+        email: user.email,
+        name: user.name,
       };
 
-      const token =await generateToken(payload);
+      const token = generateToken(payload);
 
-      return res.status(201).send(token);
+      return res.cookie("user", token).send(payload);
     } catch (error) {
-      console.log("error",error)
+      console.log('error',error)
       res.status(500).send(error);
     }
   }

@@ -27,7 +27,7 @@ app.use((err, req, res, next) => {
   res.status(500).send(err.message);
 });
 
-db.sync({ force: true }).then(() => {
+db.sync({ force: false }).then(() => {
   app.listen(process.env.PORT, () =>
     console.log("server levantado en puerto 3001")
   );
