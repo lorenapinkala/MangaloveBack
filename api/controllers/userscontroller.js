@@ -43,6 +43,15 @@ class Userscontroller {
       res.status(500).send(error);
     }
   }
+
+  static async logout(req, res) {
+    try {
+      return res.clearcookie("user").status(204);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  }
+
 }
 
 module.exports = Userscontroller;

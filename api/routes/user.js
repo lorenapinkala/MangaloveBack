@@ -11,6 +11,8 @@ router.post("/register", Userscontroller.register);
 //ruta para el login del usuario requiere req.body con email y el password
 router.post("/login", Userscontroller.login);
 
+//ruta para el logout del usuario 
+router.post("/logout", Userscontroller.logout);
 
 router.get("/me", validateAuth, (req, res) => {
     res.send(req.user);
